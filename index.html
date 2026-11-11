@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Group Finder</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#results-heading">Skip to study groups</a>
+
+  <header>
+    <h1>Study Group Finder</h1>
+    <p>Find a study group for your course, or start your own.</p>
+  </header>
+
+  <main>
+    <p id="message" role="status" aria-live="polite"></p>
+
+    <section class="filters" aria-labelledby="filters-heading">
+      <h2 id="filters-heading">Find a group</h2>
+      <form id="filter-form" role="search">
+        <div class="field">
+          <label for="search">Search by title or course</label>
+          <input type="search" id="search" name="search" placeholder="e.g. revision">
+        </div>
+
+        <div class="field">
+          <label for="filter-course">Course</label>
+          <select id="filter-course" name="course">
+            <option value="">All courses</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="filter-day">Day</label>
+          <select id="filter-day" name="day">
+            <option value="">Any day</option>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="filter-mode">Mode</label>
+          <select id="filter-mode" name="mode">
+            <option value="">Any mode</option>
+            <option>On campus</option>
+            <option>Online</option>
+          </select>
+        </div>
+
+        <button type="button" id="clear-filters">Clear filters</button>
+      </form>
+    </section>
+
+    <section class="results" aria-labelledby="results-heading">
+      <h2 id="results-heading">Study groups</h2>
+      <p id="summary" aria-live="polite"></p>
+      <div id="group-list">
+      </div>
+    </section>
+
+    <section class="create" aria-labelledby="create-heading">
+      <h2 id="create-heading">Create a group</h2>
+      <form id="create-form">
+        <div class="field">
+          <label for="new-course">Course</label>
+          <input type="text" id="new-course" name="course" placeholder="e.g. CS 344" required>
+        </div>
+
+        <div class="field">
+          <label for="new-title">Group title</label>
+          <input type="text" id="new-title" name="title" minlength="5" maxlength="60" required>
+        </div>
+
+        <div class="field">
+          <label for="new-day">Day</label>
+          <select id="new-day" name="day" required>
+            <option value="">Choose a day</option>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="new-time">Time</label>
+          <input type="time" id="new-time" name="time" required>
+        </div>
+
+        <fieldset class="field">
+          <legend>Mode</legend>
+          <label><input type="radio" name="mode" value="On campus" required> On campus</label>
+          <label><input type="radio" name="mode" value="Online"> Online</label>
+        </fieldset>
+
+        <div class="field">
+          <label for="new-location">Location or meeting link</label>
+          <input type="text" id="new-location" name="location" required>
+        </div>
+
+        <div class="field">
+          <label for="new-capacity">Capacity (2 to 12 students)</label>
+          <input type="number" id="new-capacity" name="capacity" min="2" max="12" step="1" required>
+        </div>
+
+        <button type="submit">Create group</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>CS 344 Web Engineering, Assignment 1. Built with plain HTML, CSS and JavaScript.</p>
+  </footer>
+</body>
+</html>

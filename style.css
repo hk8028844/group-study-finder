@@ -1,0 +1,249 @@
+:root {
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-text: #1a1a1a;
+  --color-muted: #4a5568;
+  --color-accent: #1f5fbf;
+  --color-accent-dark: #174a96;
+  --color-border: #cbd5e0;
+  --color-error: #b00020;
+  --color-success: #1b6e3c;
+  --color-warning: #8a5a00;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --radius: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1, h2 {
+  line-height: 1.2;
+  margin: 0 0 var(--space-1);
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.skip-link:focus {
+  top: var(--space-1);
+}
+
+header,
+footer {
+  padding: var(--space-2);
+  background: var(--color-accent);
+  color: #fff;
+}
+
+header p,
+footer p {
+  margin: 0;
+}
+
+main {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-2);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: var(--space-2);
+}
+
+fieldset.field {
+  border: none;
+  padding: 0;
+  margin-inline: 0;
+}
+
+label,
+legend {
+  font-weight: 600;
+}
+
+fieldset label {
+  font-weight: 400;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+input[type="radio"] {
+  width: auto;
+  min-height: 0;
+  margin-right: 0.4rem;
+}
+
+input:user-invalid,
+select:user-invalid {
+  border-color: var(--color-error);
+}
+
+button {
+  min-height: 44px;
+  padding: 0.5rem 1.25rem;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--color-accent-dark);
+}
+
+button:disabled {
+  background: var(--color-muted);
+  cursor: not-allowed;
+}
+
+:focus-visible {
+  outline: 3px solid #f5a623;
+  outline-offset: 2px;
+}
+
+#message:empty {
+  display: none;
+}
+
+#message {
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  font-weight: 600;
+}
+
+#message.success { border-color: var(--color-success); color: var(--color-success); }
+#message.warning { border-color: var(--color-warning); color: var(--color-warning); }
+#message.error   { border-color: var(--color-error);   color: var(--color-error); }
+
+#group-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+.group-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 6px solid var(--color-accent);
+  border-radius: var(--radius);
+}
+
+.group-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.group-card .course {
+  margin: 0;
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.group-card .details {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.group-card .seats {
+  margin: 0;
+  font-weight: 600;
+}
+
+.group-card.is-full {
+  border-left-color: var(--color-error);
+}
+
+.group-card.is-joined {
+  border-left-color: var(--color-success);
+}
+
+@media (min-width: 600px) {
+  
+  #filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-2);
+  }
+
+  #filter-form .field {
+    flex: 1 1 160px;
+    margin-bottom: 0;
+  }
+
+  
+  #group-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  
+  main {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+
+  
+  #message,
+  .filters {
+    grid-column: 1 / -1;
+  }
+
+  
+  #group-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
