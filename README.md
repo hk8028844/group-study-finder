@@ -1,7 +1,8 @@
 # Study Group Finder
 
 **CS 344 Web Engineering – Assignment 1**  
-**Assigned Idea:** 06 – Study Group Finder
+**Assigned Idea:** 06 – Study Group Finder  
+**Live Demo:** https://hk8028844.github.io/group-study-finder/
 
 Study Group Finder is a simple web application that helps students find and join study groups for their courses. Students can browse available groups, search and filter them, check meeting details and available seats, or create a new group if they cannot find a suitable one.
 
