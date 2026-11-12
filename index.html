@@ -4,124 +4,128 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Study Group Finder</title>
+  <meta name="description" content="Find a study group by course, day and mode, join one that has seats left, or start your own.">
+  <meta name="theme-color" content="#2f5d50">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232f5d50'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23f5f2ea'%3ESG%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#results-heading">Skip to study groups</a>
+  <a class="skip-link" href="#groups-heading">Skip to study groups</a>
 
-  <header>
-    <h1>Study Group Finder</h1>
-    <p>Find a study group for your course, or start your own.</p>
+  <header class="site-header" id="top">
+    <div class="wrap">
+      <h1>Study Group Finder</h1>
+      <p>Find people to study with. Join a group that has seats left, or start your own.</p>
+    </div>
   </header>
 
-  <main>
-    <p id="message" role="status" aria-live="polite"></p>
-
-    <section class="filters" aria-labelledby="filters-heading">
-      <h2 id="filters-heading">Find a group</h2>
-      <form id="filter-form" role="search">
-        <div class="field">
-          <label for="search">Search by title or course</label>
-          <input type="search" id="search" name="search" placeholder="e.g. revision">
-        </div>
-
-        <div class="field">
-          <label for="filter-course">Course</label>
-          <select id="filter-course" name="course">
-            <option value="">All courses</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="filter-day">Day</label>
-          <select id="filter-day" name="day">
-            <option value="">Any day</option>
-            <option>Monday</option>
-            <option>Tuesday</option>
-            <option>Wednesday</option>
-            <option>Thursday</option>
-            <option>Friday</option>
-            <option>Saturday</option>
-            <option>Sunday</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="filter-mode">Mode</label>
-          <select id="filter-mode" name="mode">
-            <option value="">Any mode</option>
-            <option>On campus</option>
-            <option>Online</option>
-          </select>
-        </div>
-
-        <button type="button" id="clear-filters">Clear filters</button>
-      </form>
-    </section>
-
-    <section class="results" aria-labelledby="results-heading">
-      <h2 id="results-heading">Study groups</h2>
-      <p id="summary" aria-live="polite"></p>
-      <div id="group-list">
+  <main class="wrap">
+    <form class="filters" id="filter-form" role="search" aria-label="Find a study group">
+      <div class="field field-search">
+        <label for="search">Search</label>
+        <input type="search" id="search" name="search" placeholder="Course or title, e.g. revision" autocomplete="off">
       </div>
+
+      <div class="field">
+        <label for="filter-course">Course</label>
+        <select id="filter-course" name="course">
+          <option value="">All courses</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="filter-day">Day</label>
+        <select id="filter-day" name="day">
+          <option value="">Any day</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="filter-mode">Mode</label>
+        <select id="filter-mode" name="mode">
+          <option value="">Any mode</option>
+        </select>
+      </div>
+
+      <button type="button" class="button-text" id="clear-filters" hidden>Clear filters</button>
+    </form>
+
+    <section class="results" aria-labelledby="groups-heading">
+      <div class="results-head">
+        <h2 id="groups-heading">Study groups</h2>
+        <p id="summary"></p>
+      </div>
+      <p id="message" class="message" role="status"></p>
+      <div id="group-list" class="group-list"></div>
     </section>
 
-    <section class="create" aria-labelledby="create-heading">
-      <h2 id="create-heading">Create a group</h2>
-      <form id="create-form">
+    <details class="create" id="create-panel">
+      <summary><h2 id="create-heading">Can't find a group? Create one</h2></summary>
+
+      <form class="create-form" id="create-form" aria-labelledby="create-heading" autocomplete="off">
         <div class="field">
           <label for="new-course">Course</label>
-          <input type="text" id="new-course" name="course" placeholder="e.g. CS 344" required>
+          <input type="text" id="new-course" name="course" maxlength="20" placeholder="e.g. CS 344" required>
         </div>
 
-        <div class="field">
+        <div class="field wide">
           <label for="new-title">Group title</label>
-          <input type="text" id="new-title" name="title" minlength="5" maxlength="60" required>
+          <input type="text" id="new-title" name="title" minlength="5" maxlength="60" placeholder="e.g. Midterm revision" required>
         </div>
 
         <div class="field">
           <label for="new-day">Day</label>
           <select id="new-day" name="day" required>
             <option value="">Choose a day</option>
-            <option>Monday</option>
-            <option>Tuesday</option>
-            <option>Wednesday</option>
-            <option>Thursday</option>
-            <option>Friday</option>
-            <option>Saturday</option>
-            <option>Sunday</option>
           </select>
         </div>
 
         <div class="field">
-          <label for="new-time">Time</label>
+          <label for="new-time">Start time</label>
           <input type="time" id="new-time" name="time" required>
         </div>
 
-        <fieldset class="field">
+        <div class="field">
+          <label for="new-duration">Length</label>
+          <select id="new-duration" name="duration" required></select>
+        </div>
+
+        <div class="field">
+          <label for="new-capacity">Capacity (2 to 12)</label>
+          <input type="number" id="new-capacity" name="capacity" min="2" max="12" step="1" inputmode="numeric" required>
+        </div>
+
+        <fieldset class="field mode-field">
           <legend>Mode</legend>
-          <label><input type="radio" name="mode" value="On campus" required> On campus</label>
-          <label><input type="radio" name="mode" value="Online"> Online</label>
+          <div class="radio-group">
+            <label class="radio"><input type="radio" name="mode" value="On campus" required> On campus</label>
+            <label class="radio"><input type="radio" name="mode" value="Online"> Online</label>
+          </div>
         </fieldset>
 
-        <div class="field">
+        <div class="field full">
           <label for="new-location">Location or meeting link</label>
-          <input type="text" id="new-location" name="location" required>
+          <input type="text" id="new-location" name="location" maxlength="80" placeholder="e.g. Library, table 3" required>
         </div>
 
-        <div class="field">
-          <label for="new-capacity">Capacity (2 to 12 students)</label>
-          <input type="number" id="new-capacity" name="capacity" min="2" max="12" step="1" required>
-        </div>
+        <p id="create-message" class="message error full" role="alert" hidden></p>
 
-        <button type="submit">Create group</button>
+        <div class="form-actions full">
+          <button type="submit" class="button">Create group</button>
+        </div>
       </form>
-    </section>
+    </details>
   </main>
 
-  <footer>
-    <p>CS 344 Web Engineering, Assignment 1. Built with plain HTML, CSS and JavaScript.</p>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-name">Study Group Finder</p>
+        <p>Groups are kept in your browser for this visit and reset when the page is refreshed.</p>
+      </div>
+      <p><a href="#top">Back to top</a></p>
+    </div>
   </footer>
 </body>
 </html>
